@@ -1,6 +1,6 @@
 # Infobip API Filter Query Builder
 
-An interactive web application that helps users construct and test filter queries for Infobip's GET person API endpoint. This tool was built to address a critical support problem where 34.6% of support tickets stem from confusion about API filter syntax, operators, and URL encoding.
+An interactive web application that helps users construct and test filter queries for Infobip's GET person API endpoint.
 
 ## Features
 
@@ -20,7 +20,6 @@ Users of Infobip's GET person API consistently struggle with:
 - The #contains operator searches for exact tag names, not substrings
 - Misleading error messages that don't indicate query problems
 
-**Real support example**: Thread 1760607690 - Client spent 47 replies over multiple days trying to filter users by tags, trying various wrong operators before finding the correct one.
 
 ## Getting Started
 
