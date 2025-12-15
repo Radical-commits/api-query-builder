@@ -27,29 +27,33 @@ async function fetchStandardAttributes(baseUrl, apiKey) {
 
   // Return all standard fields from OpenAPI spec (IamPersonV2)
   // We show all fields regardless of whether they're populated in the sample profile
+  // Note: \u0001 is the special delimiter Infobip uses for nested properties
   const standardFields = [
-    { name: 'id', type: 'string' },
-    { name: 'externalId', type: 'string' },
-    { name: 'firstName', type: 'string' },
-    { name: 'lastName', type: 'string' },
-    { name: 'middleName', type: 'string' },
-    { name: 'gender', type: 'string' },
-    { name: 'birthDate', type: 'date' },
-    { name: 'address', type: 'string' },
-    { name: 'city', type: 'string' },
-    { name: 'country', type: 'string' },
-    { name: 'preferredLanguage', type: 'string' },
-    { name: 'profilePicture', type: 'string' },
-    { name: 'tags', type: 'array' },
-    { name: 'type', type: 'string' },
-    { name: 'origin', type: 'string' },
-    { name: 'createdAt', type: 'date' },
-    { name: 'modifiedAt', type: 'date' },
-    { name: 'modifiedFrom', type: 'string' },
+    { name: 'id', displayName: 'id', type: 'string' },
+    { name: 'externalId', displayName: 'externalId', type: 'string' },
+    { name: 'firstName', displayName: 'firstName', type: 'string' },
+    { name: 'lastName', displayName: 'lastName', type: 'string' },
+    { name: 'middleName', displayName: 'middleName', type: 'string' },
+    { name: 'gender', displayName: 'gender', type: 'string' },
+    { name: 'birthDate', displayName: 'birthDate', type: 'date' },
+    { name: 'destinations\u0001email', displayName: 'email', type: 'string' },
+    { name: 'destinations\u0001msisdn', displayName: 'phone', type: 'string' },
+    { name: 'address', displayName: 'address', type: 'string' },
+    { name: 'city', displayName: 'city', type: 'string' },
+    { name: 'country', displayName: 'country', type: 'string' },
+    { name: 'preferredLanguage', displayName: 'preferredLanguage', type: 'string' },
+    { name: 'profilePicture', displayName: 'profilePicture', type: 'string' },
+    { name: 'tags', displayName: 'tags', type: 'array' },
+    { name: 'type', displayName: 'type', type: 'string' },
+    { name: 'origin', displayName: 'origin', type: 'string' },
+    { name: 'createdAt', displayName: 'createdAt', type: 'date' },
+    { name: 'modifiedAt', displayName: 'modifiedAt', type: 'date' },
+    { name: 'modifiedFrom', displayName: 'modifiedFrom', type: 'string' },
   ];
 
   return standardFields.map(field => ({
     name: field.name,
+    displayName: field.displayName,
     type: field.type,
     isCustom: false,
   }));
@@ -86,6 +90,7 @@ async function fetchCustomAttributes(baseUrl, apiKey) {
   if (data.customAttributes && Array.isArray(data.customAttributes)) {
     return data.customAttributes.map(attr => ({
       name: `customAttributes.${attr.name}`,
+      displayName: attr.name, // Show just the custom attribute name, not the prefix
       type: (attr.dataType || 'string').toLowerCase(), // Normalize to lowercase
       isCustom: true,
     }));

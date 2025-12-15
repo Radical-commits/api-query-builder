@@ -490,7 +490,7 @@ code {
 .condition-value {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-2);
   min-width: 0;
 }
 
@@ -498,6 +498,25 @@ code {
 .condition-operator select,
 .condition-value input {
   min-width: 0;
+}
+
+.field-search {
+  padding: var(--space-2);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  background-color: var(--bg-surface);
+  transition: border-color 0.2s;
+}
+
+.field-search:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px var(--primary-focus-ring);
+}
+
+.field-search::placeholder {
+  color: var(--text-tertiary);
 }
 
 .condition-field label,

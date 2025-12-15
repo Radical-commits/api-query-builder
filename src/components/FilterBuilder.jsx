@@ -30,23 +30,6 @@ export default function FilterBuilder({
     );
   };
 
-  const loadExampleFilter = (exampleType) => {
-    const examples = {
-      email: [
-        { id: Date.now(), field: 'email', operator: '#contains', value: 'test' }
-      ],
-      tags: [
-        { id: Date.now(), field: 'tags', operator: '#contains', value: 'VIP Client' }
-      ],
-      multiple: [
-        { id: Date.now(), field: 'firstName', operator: '#eq', value: 'Alex' },
-        { id: Date.now() + 1, field: 'tags', operator: '#contains', value: 'VIP Client' }
-      ]
-    };
-
-    setConditions(examples[exampleType] || []);
-  };
-
   const getOperatorsForAttribute = (fieldName) => {
     const attribute = attributes.find(attr => attr.name === fieldName);
     if (!attribute) return FILTER_OPERATORS;
@@ -66,23 +49,7 @@ export default function FilterBuilder({
 
   return (
     <div className="filter-builder">
-      <div className="filter-builder-header">
-        <h2>Filter Builder</h2>
-        {attributes.length > 0 && (
-          <div className="example-filters-inline">
-            <span className="example-label">Examples:</span>
-            <button className="btn btn-small" onClick={() => loadExampleFilter('email')}>
-              Email
-            </button>
-            <button className="btn btn-small" onClick={() => loadExampleFilter('tags')}>
-              Tags
-            </button>
-            <button className="btn btn-small" onClick={() => loadExampleFilter('multiple')}>
-              Multiple
-            </button>
-          </div>
-        )}
-      </div>
+      <h2>Filter Builder</h2>
 
       {attributes.length === 0 ? (
         <div className="empty-state">
@@ -170,7 +137,7 @@ function FilterCondition({ condition, attributes, operators, onUpdate, onRemove 
               .filter(attr => !attr.isCustom)
               .map(attr => (
                 <option key={attr.name} value={attr.name}>
-                  {attr.name} ({attr.type})
+                  {attr.displayName || attr.name} ({attr.type})
                 </option>
               ))}
           </optgroup>
@@ -180,7 +147,7 @@ function FilterCondition({ condition, attributes, operators, onUpdate, onRemove 
                 .filter(attr => attr.isCustom)
                 .map(attr => (
                   <option key={attr.name} value={attr.name}>
-                    {attr.name} ({attr.type})
+                    {attr.displayName || attr.name} ({attr.type})
                   </option>
                 ))}
             </optgroup>
