@@ -12,14 +12,6 @@ An interactive web application that helps users construct and test filter querie
 - **Example Filters**: Quick-load common filter patterns
 - **Responsive Design**: Works on desktop and mobile devices
 
-## Problem Solved
-
-Users of Infobip's GET person API consistently struggle with:
-- Custom filter query parameter syntax requiring URL encoding
-- Confusing operators (#ne doesn't exist, #not vs #contains misunderstanding)
-- The #contains operator searches for exact tag names, not substrings
-- Misleading error messages that don't indicate query problems
-
 
 ## Getting Started
 
@@ -79,18 +71,6 @@ This application connects to:
    - Used to fetch custom attribute definitions
    - [API Documentation](https://www.infobip.com/docs/api/customer-engagement/people/custom-attributes/get-a-list-of-custom-attributes)
 
-## Filter Operators
-
-- **#eq**: Exact match - field equals the specified value
-- **#contains**: Exact match for arrays (e.g., tags) - NOT substring search
-- **#in**: Field value is in the provided list (comma-separated)
-- **#gt**: Greater than
-- **#gte**: Greater than or equal to
-- **#lt**: Less than
-- **#lte**: Less than or equal to
-- **#like**: Pattern matching (use % as wildcard)
-
-**Important**: The `#contains` operator searches for exact tag names, not substrings. This is a common source of confusion.
 
 ## Building for Production
 
