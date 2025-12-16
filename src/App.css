@@ -485,6 +485,129 @@ code {
   align-items: start;
 }
 
+.filter-condition.no-value {
+  grid-template-columns: 1fr 1fr;
+}
+
+.filter-condition.list-condition {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+}
+
+.condition-list-mode {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.list-conditions-wrapper {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--gray-100);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-2);
+}
+
+.list-conditions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.list-conditions-header label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.list-logic-selector {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  background-color: var(--bg-surface);
+}
+
+.empty-list-conditions {
+  padding: var(--space-3);
+  background-color: var(--bg-surface);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.empty-list-conditions p {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--text-sm);
+}
+
+.list-item-condition {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  padding-top: var(--space-5);
+  padding-left: var(--space-6);
+  padding-right: 2rem; /* Extra padding for delete button */
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--primary-500);
+}
+
+.btn-delete-list-condition {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background-color: var(--gray-200);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.btn-delete-list-condition:hover {
+  background-color: var(--error-100);
+  color: var(--error-600);
+}
+
+.list-item-field,
+.list-item-operator,
+.list-item-value {
+  padding: var(--space-2);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  background-color: var(--bg-surface);
+  min-width: 0;
+}
+
+.list-item-field:focus,
+.list-item-operator:focus,
+.list-item-value:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px var(--primary-focus-ring);
+}
+
 .condition-field,
 .condition-operator,
 .condition-value {
@@ -703,7 +826,24 @@ code {
   border-color: var(--border-default);
 }
 
+/* Secondary Button - Alias for ghost */
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--gray-50);
+  border-color: var(--gray-300);
+}
+
+.btn-secondary:active:not(:disabled) {
+  background-color: var(--gray-100);
+}
+
 /* Size Variants */
+.btn-sm,
 .btn-small {
   padding: var(--space-1) var(--space-3);
   font-size: var(--text-sm);

@@ -3,6 +3,17 @@
  */
 
 /**
+ * Sanitizes API key by removing non-ASCII characters and trimming
+ * @param {string} apiKey - Raw API key
+ * @returns {string} Sanitized API key
+ */
+function sanitizeApiKey(apiKey) {
+  if (!apiKey) return '';
+  // Remove any non-ASCII characters and trim whitespace
+  return apiKey.trim().replace(/[^\x00-\x7F]/g, '');
+}
+
+/**
  * Tests a filter query against the Infobip GET person API
  * @param {string} baseUrl - Base API URL
  * @param {string} apiKey - API authentication key
@@ -19,10 +30,12 @@ export async function testFilterQuery(baseUrl, apiKey, encodedFilter) {
       url += `&filter=${encodedFilter}`;
     }
 
+    const cleanApiKey = sanitizeApiKey(apiKey);
+
     const response = await fetch(url, {
       method: 'GET',
       headers: {
-        'Authorization': `App ${apiKey}`,
+        'Authorization': `App ${cleanApiKey}`,
         'Content-Type': 'application/json',
       },
     });
