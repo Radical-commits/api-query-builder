@@ -150,7 +150,12 @@ function App() {
           {attributesLoaded && (
             <>
               {/* Filter Preview */}
-              <FilterPreview rawFilter={rawFilter} encodedFilter={encodedFilter} />
+              <FilterPreview
+                rawFilter={rawFilter}
+                encodedFilter={encodedFilter}
+                baseUrl={baseUrl}
+                apiKey={apiKey}
+              />
 
               {/* Results Panel */}
               <ResultsPanel

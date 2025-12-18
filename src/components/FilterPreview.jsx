@@ -3,7 +3,7 @@ import { useState } from 'react';
 /**
  * Preview component showing raw and encoded filter strings with tab interface
  */
-export default function FilterPreview({ rawFilter, encodedFilter }) {
+export default function FilterPreview({ rawFilter, encodedFilter, baseUrl, apiKey }) {
   const [activeTab, setActiveTab] = useState('raw');
   const [copied, setCopied] = useState(false);
 
@@ -38,6 +38,15 @@ export default function FilterPreview({ rawFilter, encodedFilter }) {
           label: 'API Example',
           hint: 'Full API request example',
           content: `GET /people/2/persons?includeTotalCount=true&filter=${encodedFilter}\nAuthorization: App YOUR_API_KEY`,
+          isMultiline: true,
+        };
+      case 'curl':
+        const curlBaseUrl = baseUrl || 'https://your-base-url.api.infobip.com';
+        const curlApiKey = apiKey || 'YOUR_API_KEY';
+        return {
+          label: 'cURL',
+          hint: 'Ready-to-execute curl command',
+          content: `curl -X GET "${curlBaseUrl}/people/2/persons?includeTotalCount=true&filter=${encodedFilter}" \\\n  -H "Authorization: App ${curlApiKey}"`,
           isMultiline: true,
         };
       default:
@@ -75,6 +84,12 @@ export default function FilterPreview({ rawFilter, encodedFilter }) {
               onClick={() => setActiveTab('api')}
             >
               API Example
+            </button>
+            <button
+              className={`tab ${activeTab === 'curl' ? 'active' : ''}`}
+              onClick={() => setActiveTab('curl')}
+            >
+              cURL
             </button>
           </div>
 
