@@ -45,7 +45,7 @@ async function fetchStandardAttributes(baseUrl, apiKey) {
     { name: 'firstName', displayName: 'firstName', type: 'string' },
     { name: 'lastName', displayName: 'lastName', type: 'string' },
     { name: 'middleName', displayName: 'middleName', type: 'string' },
-    { name: 'gender', displayName: 'gender', type: 'string' },
+    { name: 'gender', displayName: 'gender', type: 'enum', enumValues: ['MALE', 'FEMALE'] },
     { name: 'birthDate', displayName: 'birthDate', type: 'date' },
     { name: 'contactInformation.email.address', displayName: 'email', type: 'string' },
     { name: 'contactInformation.phone.number', displayName: 'phone', type: 'string' },
@@ -55,7 +55,7 @@ async function fetchStandardAttributes(baseUrl, apiKey) {
     { name: 'preferredLanguage', displayName: 'preferredLanguage', type: 'string' },
     { name: 'profilePicture', displayName: 'profilePicture', type: 'string' },
     { name: 'tags', displayName: 'tags', type: 'array' },
-    { name: 'type', displayName: 'type', type: 'string' },
+    { name: 'type', displayName: 'type', type: 'enum', enumValues: ['CUSTOMER', 'LEAD', 'AGENT', 'UNKNOWN'] },
     { name: 'origin', displayName: 'origin', type: 'string' },
     { name: 'createdAt', displayName: 'createdAt', type: 'date' },
     { name: 'modifiedAt', displayName: 'modifiedAt', type: 'date' },
@@ -67,6 +67,7 @@ async function fetchStandardAttributes(baseUrl, apiKey) {
     displayName: field.displayName,
     type: field.type,
     isCustom: false,
+    enumValues: field.enumValues,
   }));
 }
 

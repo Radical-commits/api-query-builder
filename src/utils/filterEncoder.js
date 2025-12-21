@@ -182,12 +182,6 @@ export function buildFilterString(conditions, logic = 'and') {
       return { [operator]: fieldObject };
     }
 
-    // For array fields, invert the structure: {field: {operator: value}}
-    if (fieldType === 'array') {
-      const operatorObject = { [operator]: value };
-      return buildNestedObject(field, operatorObject);
-    }
-
     // Build nested object structure for the field
     const fieldObject = buildNestedObject(field, value);
 
@@ -255,13 +249,13 @@ export const FILTER_OPERATORS = [
     value: '#eq',
     label: 'equals',
     description: 'Equals to a specified value',
-    types: ['string', 'integer', 'decimal', 'date', 'number', 'boolean', 'date_time'],
+    types: ['string', 'integer', 'decimal', 'date', 'number', 'boolean', 'date_time', 'enum'],
   },
   {
     value: '#ne',
     label: 'not equals',
     description: 'Not equal to a specified value',
-    types: ['string', 'integer', 'decimal', 'date', 'number', 'boolean', 'date_time'],
+    types: ['string', 'integer', 'decimal', 'date', 'number', 'boolean', 'date_time', 'enum'],
   },
   {
     value: '#contains',

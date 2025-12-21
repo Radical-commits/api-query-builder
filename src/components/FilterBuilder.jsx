@@ -87,6 +87,13 @@ export default function FilterBuilder({
       );
     }
 
+    // Enum fields only support #eq and #ne
+    if (attribute.type === 'enum') {
+      return FILTER_OPERATORS.filter(op =>
+        op.value === '#eq' || op.value === '#ne'
+      );
+    }
+
     return getOperatorsForType(attribute.type);
   };
 
@@ -462,6 +469,20 @@ function FilterCondition({ condition, attributes, operators, onUpdate, onRemove 
                   <option value="">Select value...</option>
                   <option value="true">true</option>
                   <option value="false">false</option>
+                </select>
+              ) : selectedAttribute?.type === 'enum' && selectedAttribute?.enumValues ? (
+                <select
+                  value={condition.value || ''}
+                  onChange={(e) => {
+                    onUpdate(condition.id, 'value', e.target.value);
+                  }}
+                >
+                  <option value="">Select value...</option>
+                  {selectedAttribute.enumValues.map(enumVal => (
+                    <option key={enumVal} value={enumVal}>
+                      {enumVal}
+                    </option>
+                  ))}
                 </select>
               ) : (
                 <input
